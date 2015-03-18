@@ -12,9 +12,6 @@ struct pt
     float y;
 } p[100];
 
-
-
-
 unsigned long int ncr(int n, int r)
 {
     if (r > n/2)
@@ -30,7 +27,6 @@ unsigned long int ncr(int n, int r)
 
     return res;
 }
-
 
 void bez()
 {   
@@ -49,17 +45,16 @@ void bez()
         y = 0;
         for (i = 0; i < count; i++)        
         {
-            double term = pow (1-t, count-i-1);
-            double tpi = pow (t,i);
+            double term = pow (1 - t, count - i - 1);
+            double tpi = pow (t, i);
             x += nci * term * tpi * p[i].x;
             y += nci * term * tpi * p[i].y;
         }
 
-        glVertex2f(x,y);
+        glVertex2f (x, y);
     }
     glEnd();
 }
-
 
 void mouseHandler(int button, int state, int x, int y)
 {
@@ -69,9 +64,9 @@ void mouseHandler(int button, int state, int x, int y)
             if(state == GLUT_UP)
             {
 
-                p[count].x = (float)(x-250)/250.0;
-                p[count].y = (float)(250-y)/250.0;
-                printf("%d %d\n",x,y);
+                p[count].x = (float)(x - 250)/250.0;
+                p[count].y = (float)(250 - y)/250.0;
+                printf ("%d %d\n", x, y);
                 count++;
                 glutPostRedisplay();
                 return;
@@ -82,40 +77,38 @@ void mouseHandler(int button, int state, int x, int y)
     }
 }
 
-
 void display()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1.0,1.0,1.0);
-    glClearColor(0.0,0.0,0.0,0.0);
-    glOrtho(-1.0,1.0,-1.0,1.0,-1.0,1.0);
-    int i=0;
-    glBegin(GL_LINE_LOOP);
-    while(i<count)
-    {
-        glVertex2f(p[i].x,p[i].y);
+    glClear (GL_COLOR_BUFFER_BIT);
+    glColor3f (1.0, 1.0, 1.0);
+    glClearColor (0.0, 0.0, 0.0, 0.0);
+    glOrtho (-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    int i = 0;
+    glBegin (GL_LINE_LOOP);
+    while (i < count) {
+        glVertex2f (p[i].x, p[i].y);
         i++;
     }
     glEnd();
-    glColor3f(1.0,0.0,0.0);
+    glColor3f (1.0, 0.0, 0.0);
     bez();
-    glColor3f(1.0,1.0,1.0);
+    glColor3f (1.0, 1.0, 1.0);
     glFlush();
 
 }
-
 
 int main( int argc, char **argv )
 {  
     p[0].x = 0;
     p[0].y = 0;
-    glutInit(&argc,argv);
-    glutInitDisplayMode(GLUT_SINGLE);
-    glutInitWindowSize(500,500);
-    glutInitWindowPosition(100,100);
-    glutCreateWindow("OpenGL - BEZIER");
-    glutDisplayFunc(display);
-    glutMouseFunc(mouseHandler);
+    glutInit (&argc,argv);
+    glutInitDisplayMode (GLUT_SINGLE);
+    glutInitWindowSize (500,500);
+    glutInitWindowPosition (100,100);
+    glutCreateWindow ("OpenGL - BEZIER");
+    glutDisplayFunc (display);
+    glutMouseFunc (mouseHandler);
     glutMainLoop();
     return 0;
 }
+
